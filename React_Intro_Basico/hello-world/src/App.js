@@ -1,3 +1,5 @@
+/* eslint-disable no-unreachable */
+/* eslint-disable no-lone-blocks */
 // import logo from './logo.svg';
 import './App.css';
 import { Component } from 'react';
@@ -23,24 +25,7 @@ class App extends Component {
     // age: 27,
     // counter: 0
 
-    posts: [
-      {
-        id: 1,
-        title: 'Titulo 1',
-        body: 'Corpo 1'
-      },
-      {
-        id: 2,
-        title: 'Titulo 2',
-        body: 'Corpo 2'
-      },
-      {
-        id: 3,
-        title: 'Titulo 3',
-        body: 'Corpo 3'
-      },
-    ]
-
+    posts: []
   }
 
   // Utilizando o Arrow Functions para não precisar chamar this.
@@ -60,25 +45,63 @@ class App extends Component {
   //   this.setState({ counter: counter + 1 })
   // }
 
+  // Trabalhando com dados externos e Lifecycle.
+  componentDidMount() {
+
+    this.loadPosts();
+
+    // Trabalhando com Fetch API
+    // fetch('https://jsonplaceholder.typicode.com/posts')
+    //   .then(response => response.json())
+    //   .then(posts => this.setState({ posts }))
+  }
+
+  // Utilizando uma forma melhor para trabalhando com dados externos.
+  loadPosts = async () => {
+
+    const postsResponse = fetch('https://jsonplaceholder.typicode.com/posts');
+    const photosResponse = fetch('https://jsonplaceholder.typicode.com/photos');
+
+    const [posts, photos] = await Promise.all([postsResponse, photosResponse]);
+    //console.log(posts);
+
+    const postsJson = await posts.json();
+    const photosJson = await photos.json();
+    //console.log(postsJson.map(p => p.id + 'OI'));
+
+    // Isso se chama ziper, pegar dentro de um array informações para,
+    // se juntar a outro.
+    const postsAndPhotos = postsJson.map((posts, index) => {
+      return { ...posts, imagem: photosJson[index].url }
+    })
+
+    this.setState({ posts: postsAndPhotos });
+  }
+
   render() {
 
     // const { name, counter } = this.state;
     const { posts } = this.state;
 
     return (
+      <section className="container">
+        <div className="posts">
+          {/* Trabalhando com Arrays */}
+          {posts.map(post => (
+            <div className="post">
+              <img src={post.imagem} alt={post.title}></img>
+              <div key={post.id}
+                className="post-content">
+                <h2>{post.title}</h2>
+                <p>{post.body}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section >
+    );
 
-      <div className="App">
-
-        {/* Trabalhando com Arrays */}
-
-        {posts.map(post => (
-          <div key={post.id}>
-            <h2>{post.title}</h2>
-            <p>{post.body}</p>
-          </div>
-        ))}
-
-        {/* <header className="App-header">
+    {/* <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
 
           <p>My name is: {name}</p>
@@ -92,10 +115,6 @@ class App extends Component {
             Learn React {counter}
           </a>
         </header> */}
-
-      </div>
-
-    );
 
   }
 
