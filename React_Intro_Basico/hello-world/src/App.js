@@ -1,9 +1,11 @@
 /* eslint-disable no-unreachable */
 /* eslint-disable no-lone-blocks */
 // import logo from './logo.svg';
+
 import './App.css';
 import { Component } from 'react';
 
+import { PostCard } from './components/PostCard';
 
 class App extends Component {
 
@@ -88,14 +90,12 @@ class App extends Component {
         <div className="posts">
           {/* Trabalhando com Arrays */}
           {posts.map(post => (
-            <div className="post">
-              <img src={post.imagem} alt={post.title}></img>
-              <div key={post.id}
-                className="post-content">
-                <h2>{post.title}</h2>
-                <p>{post.body}</p>
-              </div>
-            </div>
+            <PostCard key={post.id}
+              title={post.title}
+              body={post.body}
+              id={post.id}
+              imagem={post.imagem}
+            />
           ))}
         </div>
       </section >
