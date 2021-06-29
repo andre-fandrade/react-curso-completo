@@ -2,13 +2,13 @@
 /* eslint-disable no-lone-blocks */
 // import logo from './logo.svg';
 
-import './App.css';
+import './styles.css';
 import { Component } from 'react';
 
-import { Posts } from './components/Posts';
-import { loadPosts } from './utils/load-posts';
+import { Posts } from '../../components/Posts';
+import { loadPosts } from '../../utils/load-posts';
 
-class App extends Component {
+class Home extends Component {
 
   // Utilizando construtor dentro da classe.
   // constructor(props) {
@@ -98,4 +98,4 @@ class App extends Component {
 // function App() {
 // }
 
-export default App;
+export default Home;
