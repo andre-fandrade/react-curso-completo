@@ -6,6 +6,7 @@ import './styles.css';
 import { Component } from 'react';
 
 import { Posts } from '../../components/Posts';
+import { Button } from '../../components/Button';
 import { loadPosts } from '../../utils/load-posts';
 
 class Home extends Component {
@@ -28,7 +29,10 @@ class Home extends Component {
     // age: 27,
     // counter: 0
 
-    posts: []
+    posts: [],
+    allPosts: [],
+    page: 0,
+    postsPerPage: 2,
   }
 
   // Utilizando o Arrow Functions para não precisar chamar this.
@@ -61,8 +65,27 @@ class Home extends Component {
 
   // Utilizando uma forma melhor para trabalhando com dados externos.
   loadPosts = async () => {
+    const { page, postsPerPage } = this.state;
+
     const postsAndPhotos = await loadPosts();
-    this.setState({ posts: postsAndPhotos });
+    this.setState({
+      posts: postsAndPhotos.slice(page, postsPerPage),
+      allPosts: postsAndPhotos,
+    });
+  }
+
+  loadMorePosts = () => {
+
+    const { posts, allPosts, page, postsPerPage } = this.state;
+    const nextPosts = posts.length + postsPerPage;
+
+    // const nextPosts = allPosts.slice(nextPage, nextPage + postsPerPage);
+    // posts.push(...nextPosts);
+    // this.setState({ posts, page: nextPage });
+
+    this.setState({
+      posts: allPosts.slice(page, nextPosts)
+    })
   }
 
   render() {
@@ -73,6 +96,12 @@ class Home extends Component {
     return (
       <section className="container">
         <Posts posts={posts} />
+
+        <Button
+          text="Carregar mais Posts"
+          onClick={this.loadMorePosts}
+        />
+
       </section >
     );
 
