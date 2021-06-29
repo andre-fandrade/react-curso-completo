@@ -6,6 +6,7 @@ import './App.css';
 import { Component } from 'react';
 
 import { PostCard } from './components/PostCard';
+import { loadPosts } from './utils/load-posts';
 
 class App extends Component {
 
@@ -60,23 +61,7 @@ class App extends Component {
 
   // Utilizando uma forma melhor para trabalhando com dados externos.
   loadPosts = async () => {
-
-    const postsResponse = fetch('https://jsonplaceholder.typicode.com/posts');
-    const photosResponse = fetch('https://jsonplaceholder.typicode.com/photos');
-
-    const [posts, photos] = await Promise.all([postsResponse, photosResponse]);
-    //console.log(posts);
-
-    const postsJson = await posts.json();
-    const photosJson = await photos.json();
-    //console.log(postsJson.map(p => p.id + 'OI'));
-
-    // Isso se chama ziper, pegar dentro de um array informações para,
-    // se juntar a outro.
-    const postsAndPhotos = postsJson.map((posts, index) => {
-      return { ...posts, imagem: photosJson[index].url }
-    })
-
+    const postsAndPhotos = await loadPosts();
     this.setState({ posts: postsAndPhotos });
   }
 
