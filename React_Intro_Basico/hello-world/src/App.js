@@ -5,7 +5,7 @@
 import './App.css';
 import { Component } from 'react';
 
-import { PostCard } from './components/PostCard';
+import { Posts } from './components/Posts';
 import { loadPosts } from './utils/load-posts';
 
 class App extends Component {
@@ -49,9 +49,9 @@ class App extends Component {
   // }
 
   // Trabalhando com dados externos e Lifecycle.
-  componentDidMount() {
+  async componentDidMount() {
 
-    this.loadPosts();
+    await this.loadPosts();
 
     // Trabalhando com Fetch API
     // fetch('https://jsonplaceholder.typicode.com/posts')
@@ -72,17 +72,7 @@ class App extends Component {
 
     return (
       <section className="container">
-        <div className="posts">
-          {/* Trabalhando com Arrays */}
-          {posts.map(post => (
-            <PostCard key={post.id}
-              title={post.title}
-              body={post.body}
-              id={post.id}
-              imagem={post.imagem}
-            />
-          ))}
-        </div>
+        <Posts posts={posts} />
       </section >
     );
 
