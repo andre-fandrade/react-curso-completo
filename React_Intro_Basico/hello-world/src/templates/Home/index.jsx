@@ -32,7 +32,7 @@ class Home extends Component {
     posts: [],
     allPosts: [],
     page: 0,
-    postsPerPage: 2,
+    postsPerPage: 3,
   }
 
   // Utilizando o Arrow Functions para não precisar chamar this.
@@ -91,17 +91,22 @@ class Home extends Component {
   render() {
 
     // const { name, counter } = this.state;
-    const { posts } = this.state;
+    const { posts, allPosts } = this.state;
+
+    // Seta se existe mais posts a ser carregados e liberar o botão.
+    const noMorePosts = posts.length === allPosts.length;
 
     return (
       <section className="container">
         <Posts posts={posts} />
 
-        <Button
-          text="Carregar mais Posts"
-          onClick={this.loadMorePosts}
-        />
-
+        <div className="button-container">
+          <Button
+            disabled={noMorePosts}
+            text="Carregar mais Posts"
+            onClick={this.loadMorePosts}
+          />
+        </div>
       </section >
     );
 
