@@ -110,13 +110,13 @@ class Home extends Component {
       </section >
     );
 
-    {/* <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
+    {/* <header className="Web3_connect-header">
+          <img src={logo} className="Web3_connect-logo" alt="logo" />
 
           <p>My name is: {name}</p>
           <p onClick={this.handlePclick} className="age-cl"> Click para ver idade: </p>
           <a onClick={this.handleAclick}
-            className="App-link"
+            className="Web3_connect-link"
             href="https://reactjs.org"
             target="_blank"
             rel="noopener noreferrer"
@@ -129,7 +129,7 @@ class Home extends Component {
 
 }
 
-// function App() {
+// function Web3_connect() {
 // }
 
 export default Home;

@@ -14,7 +14,7 @@ console.log(web3.eth)
 
 
 
-class App extends Component {
+class Web3_connect extends Component {
 
   state = {
     account: '',
@@ -68,7 +68,7 @@ class App extends Component {
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo"/>
           <p>
-            Edit <code>src/App.js</code> and save to reload.
+            Edit <code>src/Web3_connect.js</code> and save to reload.
             <br/>{account}
 
             <br/>
@@ -82,5 +82,5 @@ class App extends Component {
 }
 
 
-export default App;
+export default Web3_connect;
 
