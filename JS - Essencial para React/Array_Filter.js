@@ -7,9 +7,9 @@ const numbers = [80, 23, 45, 34, 1, 2, 3, 4, 5, 78, 99, 99]
 //   if (valor > 10) { return true }
 // }
 
-const numberMiorQueDez = numbers.filter((valor) => valor > 10)
+const numberMaiorQueDez = numbers.filter((valor) => valor > 10)
 
-console.log(numberMiorQueDez)
+console.log(numberMaiorQueDez)
 
 const pessoas = [
   {nome: 'Geovana', idade: 6},
