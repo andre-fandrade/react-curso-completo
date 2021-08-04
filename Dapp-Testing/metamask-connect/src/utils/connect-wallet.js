@@ -3,16 +3,19 @@ import {checkExtension} from "./check-extension";
 
 export class ConnectWallet extends Component {
 
-
   render() {
 
     const {textBtn, status, link} = checkExtension()
 
 
     if (status) {
-      function connect() {
+      async function connect() {
         const {ethereum} = window
-        ethereum.request({method: "eth_requestAccounts"})
+        await ethereum.request({method: "eth_requestAccounts"})
+          .catch(error => {
+            const {message} = error
+            console.log(`Error: ${message}`)
+          })
       }
 
       return (
@@ -23,7 +26,7 @@ export class ConnectWallet extends Component {
     } else {
       return (
         <div>
-          <button>{textBtn}</button>
+          <a href={link}>{textBtn}</a>
         </div>
       )
     }
