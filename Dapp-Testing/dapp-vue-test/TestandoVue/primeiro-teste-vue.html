@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -10,8 +10,15 @@
 <div id="app">
     <!--double mustache-->
     <p>{{ titulo + ' |OK' }}</p>
-    <p>{{ }}</p>
-    <button onclick="saudacao()">Button</button>
+    <!--    <p>{{ saudacao() }}</p>-->
+
+    <!--    Para inserir variáveis dentro das tags é necessário v-bind (Binding de Atributos)-->
+    <a v-bind:href="linkMM">Instalar Carteira</a> <br><br>
+
+    <!--    Criando Diretivas-->
+    <p v-bind:kodec-bind="linkMM">{{ criandoDiretivas }} </p>
+
+
 </div>
 
 <script>
@@ -19,18 +26,20 @@
   new Vue({
     el: '#app',
     data: {
-      titulo:
-        window
-          .ethereum
-          .selectedAddress === null ?
-            'Desconectado' : 'Conectado',
+      linkMM: 'https://metamask.io/',
+      titulo: window
+        .ethereum
+        .selectedAddress === null ?
+        'Desconectado' : 'Conectado',
+      criandoDiretivas: 'Criando Diretivas' // + document
+      //    .querySelector('[kodec-bind]')
+      //    .getAttribute('kodec-bind'),
 
     },
     methods: {
       saudacao: function () {
-        // return 'Olá Tudo bem?'
-        console.log('teste')
-
+        // return this.titulo + 'k'
+        alert('Eita agora deu.')
       }
     }
   })
