@@ -6,7 +6,7 @@ new Vue({
     IMAGEM: 'https://static-cse.canva.com/blob/183499/IMAGE-1.jpg'
   },
   methods: {
-    NUMERO_RANDOMICO: function () {
+    NUMERO_RAND: function () {
       return Math.random()
     }
   }
