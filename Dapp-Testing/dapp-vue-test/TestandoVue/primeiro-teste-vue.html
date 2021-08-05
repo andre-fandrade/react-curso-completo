@@ -9,9 +9,9 @@
 
 <div id="app">
     <!--double mustache-->
-    <p id="aaa">{{ titulo + 'oi' }}</p>
-    <p>{{  }}</p>
-    <button onclick="">Button</button>
+    <p>{{ titulo + ' |OK' }}</p>
+    <p>{{ }}</p>
+    <button onclick="saudacao()">Button</button>
 </div>
 
 <script>
@@ -19,7 +19,12 @@
   new Vue({
     el: '#app',
     data: {
-      titulo: window.ethereum.selectedAddress
+      titulo:
+        window
+          .ethereum
+          .selectedAddress === null ?
+            'Desconectado' : 'Conectado',
+
     },
     methods: {
       saudacao: function () {
