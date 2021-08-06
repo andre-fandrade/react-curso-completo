@@ -1,0 +1,47 @@
+<script src="https://unpkg.com/vue"></script>
+
+<div id="app">
+    <p>{{ contador }}</p>
+    <button v-on:click="somar">Somar</button>
+    <p v-on:mousemove="AtualizarXY">Mouse: {{ x }} e {{ y }} |
+        <!--    <span v-on:mousemove="parar"> PARAR AQUI !!!! </span>-->
+        <!--        <span v-on:mousemove.stop=""> PARAR AQUI !!!! </span>-->
+        <span v-on:mousemove="naoNavegar"> PARAR AQUI !!!! </span>
+    </p>
+    <!--    Prevent previne o comportamento padrão -->
+    <a v-on:click="naoNavegar" href="https://google.com">Google</a>
+
+    <input type="text" v-on:keyup.enter="exibirAlerta" v-bind:value="exibirInput">
+</div>
+
+<script>
+  new Vue({
+    el: '#app',
+    data: {
+      contador: 0,
+      x: 0,
+      y: 0,
+      exibirInput: ''
+    },
+    methods: {
+      somar: function () {
+        return this.contador++
+      },
+      AtualizarXY: function (event) {
+        const {clientX, clientY} = event
+        this.x = clientX
+        this.y = clientY
+      },
+      parar: function (e) {
+        e.stopPropagation()
+      },
+      naoNavegar: function (e) {
+        e.preventDefault()
+      },
+      exibirAlerta: function () {
+        alert('Estou te alertando!')
+        this.exibirInput = 'Estou te alertando!'
+      }
+    }
+  })
+</script>
