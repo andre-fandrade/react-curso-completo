@@ -1,0 +1,44 @@
+<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+
+<div id="app">
+    <!--
+    - Two Way Binding
+    Quando é utilizado o v-bind: está sendo modificado na view instance e atualizando
+    o template, quando quero fazer com que ao atualizar um dado no template também seja
+    atualizado na view instance temos que fazer Ex:
+
+    v-bind: JS > HTML (Instance para Template) Pego um dado da minha instance
+    para ser usada no template.
+
+    v-on: HTML > JS (Template para Instance) Pego dados do meu HTML para alterar
+    meu JS ou algo do gênero
+    -->
+
+    <span> {{ titulo }} </span>
+
+    <hr>
+
+    <input type="text" v-bind:value="titulo"
+           v-on:input="titulo = $event.target.value">
+
+    <hr>
+
+    <span> {{ titulo2 }} </span>
+
+    <hr>
+
+    <input type="text" v-model="titulo2">
+
+</div>
+
+<script>
+
+  new Vue({
+    el: '#app',
+    data: {
+      titulo: 'Usando v-bind: e v-on:',
+      titulo2: 'Usando v-model'
+    }
+  })
+
+</script>
