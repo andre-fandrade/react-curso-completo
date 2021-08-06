@@ -20,6 +20,7 @@
     <p>Contador: {{contador}} | {{contador2}}</p>
     <hr>
     <p>Resultado: {{resultado}}</p>
+    <p>Watch: {{respostaWatch}}</p>
 </div>
 
 <script>
@@ -28,7 +29,8 @@
     el: '#app',
     data: {
       contador: 0,
-      contador2: 0
+      contador2: 0,
+      respostaWatch: ''
     },
     computed: {
       resultado() {
@@ -39,7 +41,9 @@
     watch: {
       contador(novo, antigo) {
         console.log(novo, antigo)
+
         setTimeout(() => {
+          this.respostaWatch = 'Restaurado valor padrão.'
           this.contador = 0
         }, 2000)
       }
