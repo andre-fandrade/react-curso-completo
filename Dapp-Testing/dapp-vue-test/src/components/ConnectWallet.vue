@@ -1,6 +1,8 @@
 <template>
    <div class="Connect">
-      <p> ok google! {{nome}}</p>
+      <p> ok google! {{dataDeHoje}}</p>
+      <p>{{teste}}</p>
+
    </div>
 </template>
 
@@ -8,11 +10,16 @@
 export default {
    name: 'ConnectWallet',
 
+   data() {
+      return {
+         dataDeHoje: new Date(),
+
+      }
+   },
+
 
    props: {
-      data: '.Connect' {
-         nome: 'dffffdds'
-      }
+      teste: String
    }
 }
 </script>
