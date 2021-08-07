@@ -28,12 +28,15 @@
 
 <div id="app">
     <!--
+
     Estilo Dinâmico e Classe CSS
 
-    Formas de usar estilos de forma dinâmica.
+    Utilizando Propriedades Computadas, deixando mais limpo o código do template.
+
+
     -->
 
-    <div class="demo" :class="{c1: aplicarC1}"
+    <div class="demo" :class="estilo"
          @click="aplicarC1 = !aplicarC1"></div>
     <div class="demo"></div>
     <div class="demo"></div>
@@ -46,8 +49,16 @@
     el: '#app',
     data: {
       aplicarC1: false
-
+    },
+    computed: {
+        estilo() {
+          return {
+            c1: this.aplicarC1,
+            c2: !this.aplicarC1
+          }
+        }
     }
+
   })
 
 </script>
