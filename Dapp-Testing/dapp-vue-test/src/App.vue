@@ -1,21 +1,33 @@
 <template>
-   <div id="app">
-      <!--    <img alt="Vue logo" src="./assets/logo.png">-->
-      <ConnectWallet
-          v-bind:teste="veioDoApp"
-      />
-      <hr>
-      <EventoV1 />
-      <hr>
-      <EventoV2 />
-      <hr>
+
+   <div id="app" class="container">
+      <div class="row">
+         <div class="col">
+            <ConnectWallet
+                v-bind:teste="veioDoApp"
+            />
+         </div>
+         <div class="col">
+            <EventoV1/>
+         </div>
+         <div class="col">
+            <EventoV2/>
+         </div>
+      </div>
+      <div class="row">
+         <div class="col">
+            <PropriedadesReativas/>
+         </div>
+      </div>
    </div>
+
 </template>
 
 <script>
 import ConnectWallet from "@/components/ConnectWallet";
 import EventoV1 from "@/components/EventoV1";
 import EventoV2 from "@/components/EventoV2";
+import PropriedadesReativas from "@/components/PropriedadesReativas";
 
 export default {
    name: 'App',
@@ -24,13 +36,14 @@ export default {
       ConnectWallet,
       EventoV1,
       EventoV2,
+      PropriedadesReativas,
    },
 
    data() {
       return {
          veioDoApp: 'Veio do App essa Mensagem.'
       }
-   }
+   },
 
 }
 </script>
