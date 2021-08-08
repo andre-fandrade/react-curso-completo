@@ -8,8 +8,8 @@
 	com id "efeito" para associar as classes CSS. -->
 	<h2>#01</h2>
 	<div>
-		<button @click="iniciarEfeito">Iniciar Efeito</button>
-		<div id="efeito"></div>
+		<button @click="iniciarEfeito = !iniciarEfeito">Iniciar Efeito</button>
+		<div id="efeito" :class="{encolher: iniciarEfeito, destaque: !iniciarEfeito}"></div>
 	</div>
 	
 	<!-- 2) Crie duas classes CSS e associe a div usando a
