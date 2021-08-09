@@ -1,0 +1,40 @@
+<meta charset="utf-8">
+
+<script src="https://unpkg.com/vue"></script>
+
+<!--
+    Uso da tag template
+
+    Quando executado no html ela não aparece, sua função é justamente
+    ser uma junção de elementos que no caso não queira usar uma tags
+    numa condicional.
+-->
+
+<div id="app">
+    <template v-if="logado">
+        <p> Usuário: {{usuario }}</p>
+        <p> Perfil: Admin </p>
+    </template>
+
+    <template v-else-if="anonimo">
+        <p>Navegando como Anonimo.</p>
+        <p> Perfil: Convidado </p>
+    </template>
+
+    <p v-else>Nenhum usuário logado.</p>
+    <button @click="logado = !logado">
+        {{!logado ? 'Entrar' : 'Sair'}}
+    </button>
+    <input type="checkbox" v-model="anonimo">
+</div>
+
+<script>
+  new Vue({
+    el: '#app',
+    data: {
+      usuario: 'André',
+      logado: false,
+      anonimo: false
+    }
+  })
+</script>

@@ -2,12 +2,22 @@
 
 <script src="https://unpkg.com/vue"></script>
 
+<!--
+    Uso da tag template
+
+    Quando executado no html ela não aparece, sua função é justamente
+    ser uma junção de elementos que no caso não queira usar uma tags
+    numa condicional.
+-->
+
 <div id="app">
     <p v-if="logado">Usuário: {{usuario }}</p>
+    <p v-else-if="anonimo">Navegando como Anonimo.</p>
     <p v-else>Nenhum usuário logado.</p>
     <button @click="logado = !logado">
         {{!logado ? 'Entrar' : 'Sair'}}
     </button>
+    <input type="checkbox" v-model="anonimo">
 </div>
 
 <script>
@@ -15,7 +25,8 @@
     el: '#app',
     data: {
       usuario: 'André',
-      logado: false
+      logado: false,
+      anonimo: false
     }
   })
 </script>
