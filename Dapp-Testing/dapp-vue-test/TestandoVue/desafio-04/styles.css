@@ -21,3 +21,22 @@
 .color {
 	color: green;
 }
+
+.exemplo {
+	height: 100px;
+}
+
+.girar {
+	transform: rotate(45deg);
+}
+
+.barra-progresso {
+	height: 30px;
+	width: 500px;
+	border: 1px solid black;
+}
+
+.progresso {
+	background-color: red;
+	height: 100%;
+}

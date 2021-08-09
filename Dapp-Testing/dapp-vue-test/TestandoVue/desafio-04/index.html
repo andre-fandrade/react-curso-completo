@@ -22,25 +22,25 @@
         (crie classe CSS de exemplo). -->
     <h2>#03</h2>
     <div>
-        <input type="text">
-        <div></div>
+        <input type="text" v-model="exemplo">
+        <div :class="exemplo"></div>
     </div>
 
     <!-- 4) Aplique na div abaixo a classe informada pelo usuário e
     outra classe usando o valor true/false (crie classes CSS de exemplo). -->
     <h2>#04</h2>
     <div>
-        <input type="text">
-        <input type="text">
-        <div></div>
+        <input type="text" v-model="exUm">
+        <input type="text" v-model="exDois">
+        <div :class="[exUm, {girar: exDois}]"></div>
     </div>
 
     <!-- 5) Repita 3) mas utilizando estilos ao invés de classes CSS.
     Associe os estilos a div abaixo  -->
     <h2>#05</h2>
     <div>
-        <input type="text">
-        <div></div>
+        <input type="text" v-model="testeTres">
+        <div :style="estiloTres"></div>
     </div>
 
     <!-- 6) Crie uma barra de progresso simples com setInterval
@@ -48,7 +48,11 @@
     <h2>#06</h2>
     <div>
         <button @click="iniciarProgresso">Iniciar</button>
-        <div></div>
+        <div class="barra-progresso">
+            <div class="progresso" :style="barraProgresso">
+                {{progresso}}
+            </div>
+        </div>
     </div>
 </div>
 <script src="app.js"></script>
