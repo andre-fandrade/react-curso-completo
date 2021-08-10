@@ -1,0 +1,56 @@
+.flex-container {
+    /* Adiciona o FlexBox */
+    display: flex;
+    /* Direções dos items */
+    flex-direction: column;
+    flex-direction: column-reverse;
+    flex-direction: row-reverse;
+    flex-direction: row;
+
+    width: 50%;
+    /* Quebra linha para todos os items ficarem na area */
+    flex-wrap: wrap;
+    flex-wrap: wrap-reverse;
+
+    flex-flow: row wrap;
+    height: 200px;
+    flex-flow: column-reverse wrap;
+    flex-flow: row wrap;
+
+    justify-content: flex-start;
+    justify-content: flex-end;
+    justify-content: center;
+    justify-content: space-around;
+    justify-content: space-between;
+
+    /* Cross Axis */
+    height: 400px;
+    align-items: stretch;
+    align-items: baseline;
+    align-items: flex-start;
+    align-items: flex-end;
+    align-items: center;
+
+    /* mais de uma linha */
+    align-content: flex-start;
+    align-content: flex-end;
+    align-content: center;
+    align-content: space-around;
+    align-content: space-between;
+
+
+}
+
+.flex-container div {
+    box-sizing: border-box;
+}
+
+div {
+    border: 3px solid darkblue;
+    padding: 5px;
+    margin: 5px;
+}
+
+.big {
+    font-size: 2em;
+}
