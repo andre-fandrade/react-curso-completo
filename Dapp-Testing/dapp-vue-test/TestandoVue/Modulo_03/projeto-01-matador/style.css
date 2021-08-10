@@ -1,0 +1,15 @@
+#desafio {
+    display: flex;
+    background-color: DodgerBlue;
+}
+
+.players {
+    background-color: #f1f1f1;
+    margin: 10px;
+    padding: 20px;
+    font-size: 30px;
+}
+
+.monster {
+    flex-direction: row;
+}
