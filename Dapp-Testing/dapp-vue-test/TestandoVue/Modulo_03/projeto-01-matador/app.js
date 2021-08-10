@@ -13,9 +13,17 @@ new Vue({
       attack: 0
     },
     startGame: false,
-    logBattle: []
+    logBattle: [],
+    logMessage: {
+      message: '',
+      player: ''
+    },
+    winLoss: false,
+    messageWinLoss: ''
   },
-  computed: {},
+  computed: {
+
+  },
   methods: {
     baseAttack(max, min) {
       return parseInt(Math.random() * (max - min) + min)
@@ -35,10 +43,18 @@ new Vue({
 
       if ((this.player.hp -= this.monster.attack) < 0) {
         this.player.hp = 0
+        this.messageWinLoss = 'Jogador Perdeu!! :('
+        this.winLoss = true
       }
       if ((this.monster.hp -= this.player.attack) < 0) {
         this.monster.hp = 0
+        this.messageWinLoss = 'Jogador Ganhou!! :)'
+        this.winLoss = true
       }
+
+      this.logBattleFunc(`Jogador hitou ${this.player.attack}`)
+      this.logBattleFunc(`Monstro hitou ${this.monster.attack}`)
+
     },
     cure() {
       this.player.cure = this.baseCure(10, 5)
@@ -46,15 +62,25 @@ new Vue({
 
       if ((this.player.hp -= this.monster.attack) < 0) {
         this.player.hp = 0
+        this.messageWinLoss = 'Jogador Ganhou!! :)'
+        this.winLoss = true
       }
       if ((this.player.hp += this.player.cure) > 100) {
         this.player.hp = 100
       }
+
+      this.logBattleFunc(`Jogador curou ${this.player.cure}`)
+      this.logBattleFunc(`Monstro hitou ${this.monster.attack}`)
     },
     quit() {
       this.player.hp = 100
       this.monster.hp = 100
       this.startGame = false
+      this.winLoss = false
+      this.logBattle = []
+    },
+    logBattleFunc(message) {
+      this.logBattle.push(message)
     },
     barHp(value) {
       return value <= '21' ? `background-color : red; width: ${value}%;`
