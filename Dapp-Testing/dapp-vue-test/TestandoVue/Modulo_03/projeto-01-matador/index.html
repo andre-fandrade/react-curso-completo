@@ -11,18 +11,37 @@
 <div id="desafio">
 
     <div class="main-panel">
-
         <div class="players player">
-            <span>{{player.name}}</span>
-            <br>
-            <span>{{player.hp}}</span>
+            <span class="name">{{ player.name }}</span>
+            <div class="hp">
+                <div class="progressBar"
+                     :style="barHp(player.hp)">{{ player.hp }}%
+                </div>
+            </div>
         </div>
 
         <div class="players monster">
-            <span>{{monster.name}}</span>
-            <br>
-            <span>{{monster.hp}}</span>
+            <span class="name">{{ monster.name }}</span>
+            <div class="hp">
+                <div class="progressBar"
+                     :style="barHp(monster.hp)">{{ monster.hp }}%
+                </div>
+            </div>
         </div>
+    </div>
+
+
+    <div class="main-menu">
+        <template v-if="!startGame">
+            <button @click="startGame = !startGame">Iniciar Jogo</button>
+        </template>
+
+        <template v-if="startGame">
+            <button @click="attack">Ataque</button>
+            <button @click="attack(true)">Ataque Especial</button>
+            <button @click="cure">Curar</button>
+            <button @click="quit">Desistir</button>
+        </template>
     </div>
 
 </div>

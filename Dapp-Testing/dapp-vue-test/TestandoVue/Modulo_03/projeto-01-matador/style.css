@@ -1,15 +1,49 @@
-#desafio {
+.main-panel {
     display: flex;
-    background-color: DodgerBlue;
+    justify-content: space-around;
+    border: 1px solid darkslateblue;
+    align-items: flex-start;
+    padding: 10px;
+    margin: 5px;
 }
+
+.main-menu {
+    display: flex;
+    padding: 10px;
+    border: 1px solid darkslateblue;
+    justify-content: center;
+    margin: 5px;
+}
+
+.main-menu button {
+    margin: 5px;
+}
+
 
 .players {
+
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+
+    height: 100px;
+    width: 200px;
+    padding: 5px;
+    border: 1px solid black;
     background-color: #f1f1f1;
-    margin: 10px;
-    padding: 20px;
-    font-size: 30px;
+    font-size: 1.5em;
+
 }
 
-.monster {
-    flex-direction: row;
+.hp {
+    width: 200px;
+    height: 30px;
+    border: 2px solid black;
+    box-sizing: border-box;
+}
+
+.progressBar {
+    height: 100%;
+    text-align: center;
 }

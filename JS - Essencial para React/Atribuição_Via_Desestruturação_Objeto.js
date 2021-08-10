@@ -20,9 +20,7 @@ const {
   // Renomeando a variável
   name: n,
   // Extraindo dados de um objeto dentro de outro objeto.
-  address: {road, number},
-  address
-} = pessoa
+  address: {road, number},  address } = pessoa
 
 // Visualizando o Objeto.
 console.log(pessoa)
