@@ -12,7 +12,8 @@ new Vue({
       hp: 100,
       attack: 0
     },
-    startGame: false
+    startGame: false,
+    logBattle: []
   },
   computed: {},
   methods: {
@@ -40,7 +41,15 @@ new Vue({
       }
     },
     cure() {
+      this.player.cure = this.baseCure(10, 5)
+      this.monster.attack = this.baseAttack(10, 5)
 
+      if ((this.player.hp -= this.monster.attack) < 0) {
+        this.player.hp = 0
+      }
+      if ((this.player.hp += this.player.cure) > 100) {
+        this.player.hp = 100
+      }
     },
     quit() {
       this.player.hp = 100
