@@ -8,7 +8,6 @@
 
 <script>
 export default {
-   name: "Contador",
    data() {
       return {
          contador: 0

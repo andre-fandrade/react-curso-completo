@@ -1,4 +1,10 @@
 import {createApp} from 'vue'
 import App from './App.vue'
+import Contadores from "./components/Contadores";
 
-createApp(App).mount('#app')
+const app = createApp(App)
+
+// RegistroGlobal
+app.component('app-contadores', Contadores)
+
+app.mount('#app')
