@@ -1,14 +1,21 @@
 <template>
    <h1>Contadores</h1>
-   {{contador}}
+
+   <Contador/>
+   <Contador/>
+   <Contador/>
+   <Contador/>
+
 </template>
 
 <script>
+
+import Contador from "./components/Contador";
+
 export default {
-   data() {
-      return {
-         contador: 0
-      }
+
+   components: {
+      Contador: Contador
    }
 }
 </script>
