@@ -1,38 +1,39 @@
 <template>
+
    <div class="container">
-      <div class="row">
+      <div class="row align-items-start">
          <div class="col">
-            <HelloWorld msg="ANDRE"/>
+            <img
+                src="https://i1.wp.com/multarte.com.br/wp-content/uploads/2015/08/imagens-amor.jpg?fit=1680%2C1050&ssl=1"
+                class="img-thumbnail" alt="...">
          </div>
          <div class="col">
-            Column
+            <ConnectWeb3/>
          </div>
          <div class="col">
-            Column
+sssss
          </div>
       </div>
    </div>
 
+
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import ConnectWeb3 from "@/components/ConnectWeb3";
 
 export default {
    name: 'App',
    components: {
-      HelloWorld
+      ConnectWeb3
    }
 }
 </script>
 
 <style>
-#app {
-   font-family: Avenir, Helvetica, Arial, sans-serif;
-   -webkit-font-smoothing: antialiased;
-   -moz-osx-font-smoothing: grayscale;
-   text-align: center;
-   color: #2c3e50;
-   margin-top: 60px;
+
+body {
+   font-family: Nunito, Helvetica, Arial, sans-serif;
 }
+
 </style>
