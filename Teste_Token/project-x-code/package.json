@@ -9,6 +9,9 @@
   },
   "dependencies": {
     "core-js": "^3.6.5",
+    "graphql": "^15.5.1",
+    "graphql-request": "^3.5.0",
+    "json": "^11.0.0",
     "vue": "^3.0.0",
     "web3": "^1.5.1"
   },

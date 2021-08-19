@@ -16,6 +16,12 @@
       </div>
    </div>
 
+   <button @click="getAllBalances">Ver Balanço</button>
+
+   <ul>
+      <li>{{ allBalance }}</li>
+   </ul>
+
 
 </template>
 
@@ -23,6 +29,7 @@
 
 import CONTRACT from "../Utils/ContractConnect";
 import web3 from "../Utils/Web3Config";
+import {GraphQLClient, gql} from 'graphql-request';
 
 
 // CONTRACT.methods.balanceOf('0xd26114cd6EE289AccF82350c8d8487fedB8A0C07').call((err, result) => { console.log(result) })
@@ -37,7 +44,8 @@ export default {
             totalFees: '',
             totalSupply: ''
          },
-         timer: 0
+         timer: 0,
+         allBalance: []
       }
    },
    watch: {},
@@ -79,18 +87,96 @@ export default {
          const ADD_CON = '0xbc5a37d1bbe5f2a9e1cdf9af21194a5cd669420f'
 
          fetch(`https://api.bscscan.com/api?module=token&action=tokenholderlist&contractaddress=${ADD_CON}&page=1&offset=10000&apikey=${API_KEY}`)
-             .then((data) => {console.log(data)})
+             .then((data) => {
+                console.log(data)
+             })
 
 
          this.timer += 1
 
+
+      },
+      async getAllBalances() {
+
+         const endpoint = 'https://graphql.bitquery.io'
+
+         const header_name = 'X-API-KEY'
+
+         const api_bitquery = 'BQYmArtoStTpgT1R9PUOiKJiLezQgnC0'
+
+         const graphQLClient = new GraphQLClient(endpoint, {
+            headers: {
+               authorization: `${header_name} ${api_bitquery}`,
+            },
+         })
+
+         const variables = {
+            "limit": 10,
+            "offset": 0,
+            "network": "bsc",
+            "address": "0x840b41C62A8757Eb359bC1272eCaD424bb64AC0A"
+         }
+
+         const query = gql`query ($network: EthereumNetwork!, $address: String!) {
+                                ethereum(network: $network) {
+                                  address(address: {is: $address}) {
+                                    balances {
+                                      currency {
+                                        address
+                                        symbol
+                                        name
+                                        decimals
+                                      }
+                                    }
+                                  }
+                                }
+                              }`
+
+         const data = await graphQLClient.request(query, variables)
+         const dataArray = data.ethereum.address[0].balances
+
+
+         async function getValue(contractAddress) {
+            const apik = 'NMBD6EDMB1V785A78P1XC5SJ3XQZ4UFM8W'
+            const adrs = '0x840b41C62A8757Eb359bC1272eCaD424bb64AC0A'
+            const url_getValue = `https://api.bscscan.com/api?module=account&action=tokenbalance&contractaddress=${contractAddress}&address=${adrs}&tag=latest&apikey=${apik}`
+
+            const dataResponse = fetch(url_getValue)
+
+            const [dataPromise] = await Promise.all([dataResponse])
+
+            const dd = await dataPromise.json()
+
+            // const ddValue = this.convertToNumber(dd.result,'Ether')
+
+            console.log(dd.result)
+         }
+
+
+         let index = 0
+         while (index < dataArray.length) {
+            if (dataArray[index].currency.symbol !== 'BNB') {
+               console.log(dataArray[index].currency.name)
+               await getValue(dataArray[index].currency.address)
+            }
+            index++
+         }
+
+
+         console.log(dataArray)
+
+
+         // https://github.com/prisma-labs/graphql-request#authentication-via-http-header
+         // https://graphql.bitquery.io/ide#
+         // https://explorer.bitquery.io/bsc/token/0xd9025e25bb6cf39f8c926a704039d2dd51088063/transfers
       }
+
    },
    created() {
       this.contractCall()
       setInterval(() => {
          this.contractCall()
-      }, 30000)
+      }, 60000)
    }
 }
 </script>
