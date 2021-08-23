@@ -1,15 +1,7 @@
 <template>
 
-
-   <div class="row justify-content-center">
-      <div class="col">
-         <h4>My Coin Token</h4>
-      </div>
-   </div>
-
    <div class="row justify-content-center">
       <div class="col text-center">
-         <p>With supporting text below as a natural lead-in to additional content.</p>
          <p>TotalSupply: {{ contractDetails.totalSupply }}</p>
          <p>TotalBurned: {{ contractDetails.totalBurn }}</p>
          <p>TotalFee: {{ contractDetails.totalFees }}</p>
@@ -17,10 +9,6 @@
    </div>
 
    <button @click="getAllBalances">Ver Balanço</button>
-
-   <ul>
-      <li>{{ allBalance }}</li>
-   </ul>
 
 
 </template>
@@ -169,6 +157,7 @@ export default {
          // https://github.com/prisma-labs/graphql-request#authentication-via-http-header
          // https://graphql.bitquery.io/ide#
          // https://explorer.bitquery.io/bsc/token/0xd9025e25bb6cf39f8c926a704039d2dd51088063/transfers
+
       }
 
    },
