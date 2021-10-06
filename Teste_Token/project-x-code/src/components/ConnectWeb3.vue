@@ -10,6 +10,19 @@
 
    <button @click="getAllBalances">Ver Balanço</button>
 
+   <div v-if="loading" class="spinner-border" role="status">
+      <span class="visually-hidden">Loading...</span>
+   </div>
+
+   <ol v-for="(balance, index) in allBalanceWallet" :key="balance.name" class="list-group">
+      <li class="list-group-item d-flex justify-content-between align-items-start">
+         <div class="ms-2 me-auto">
+            <div class="fw-bold">{{ balance.name }}</div>
+            {{ balance.value }}
+         </div>
+         <span class="badge bg-primary rounded-pill">{{ index + 1 }}</span>
+      </li>
+   </ol>
 
 </template>
 
@@ -18,6 +31,7 @@
 import CONTRACT from "../Utils/ContractConnect";
 import web3 from "../Utils/Web3Config";
 import {GraphQLClient, gql} from 'graphql-request';
+import confBQ from '../Utils/confBitQuery';
 
 
 // CONTRACT.methods.balanceOf('0xd26114cd6EE289AccF82350c8d8487fedB8A0C07').call((err, result) => { console.log(result) })
@@ -33,7 +47,8 @@ export default {
             totalSupply: ''
          },
          timer: 0,
-         allBalance: []
+         allBalanceWallet: [],
+         loading: false
       }
    },
    watch: {},
@@ -86,15 +101,9 @@ export default {
       },
       async getAllBalances() {
 
-         const endpoint = 'https://graphql.bitquery.io'
-
-         const header_name = 'X-API-KEY'
-
-         const api_bitquery = 'BQYmArtoStTpgT1R9PUOiKJiLezQgnC0'
-
-         const graphQLClient = new GraphQLClient(endpoint, {
+         const graphQLClient = new GraphQLClient(confBQ.endpoint, {
             headers: {
-               authorization: `${header_name} ${api_bitquery}`,
+               authorization: `${confBQ.header_name} ${confBQ.api_bitquery}`,
             },
          })
 
@@ -130,29 +139,41 @@ export default {
             const url_getValue = `https://api.bscscan.com/api?module=account&action=tokenbalance&contractaddress=${contractAddress}&address=${adrs}&tag=latest&apikey=${apik}`
 
             const dataResponse = fetch(url_getValue)
-
             const [dataPromise] = await Promise.all([dataResponse])
-
             const dd = await dataPromise.json()
-
             // const ddValue = this.convertToNumber(dd.result,'Ether')
+            return dd.result
 
-            console.log(dd.result)
          }
 
 
          let index = 0
+         const allBalanceWallet = []
+         this.loading = true
+
          while (index < dataArray.length) {
             if (dataArray[index].currency.symbol !== 'BNB') {
-               console.log(dataArray[index].currency.name)
-               await getValue(dataArray[index].currency.address)
+
+               const valeuResult = await getValue(dataArray[index].currency.address)
+               console.log(typeof(valeuResult), valeuResult)
+
+               if (valeuResult === 'Max rate limit reached' ) {
+                  const dataBalance = {
+                     name: dataArray[index].currency.name,
+                     value: await getValue(dataArray[index].currency.address)
+                  }
+
+                  allBalanceWallet.push(dataBalance)
+               }
+
+
+
             }
             index++
          }
 
-
-         console.log(dataArray)
-
+         this.loading = false
+         this.allBalanceWallet = allBalanceWallet;
 
          // https://github.com/prisma-labs/graphql-request#authentication-via-http-header
          // https://graphql.bitquery.io/ide#
