@@ -31,23 +31,6 @@ clog('UperCase:', umaString.toUpperCase());
 clog('LowerCase:', umaString.toLowerCase());
 
 
-let str = 'mminha vida, vida mminha, mmommentos bomms.'
 
-let c = 0;
-while (c < str.length) {
-
-  if (str.search('mm') !== -1) {
-
-    str = str.replace('mm', 'm')
-
-    console.log('achei.');
-  }
-
-  c++;
-}
-
-
-str = str.replace('mm', 'm')
-console.log(str.search('mm') !== -1)
 
 
